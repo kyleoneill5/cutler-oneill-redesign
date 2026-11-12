@@ -1,14 +1,13 @@
 (function () {
-  if (new URLSearchParams(location.search).has("qa")) {
-    document.documentElement.classList.add("qa");
-    if (new URLSearchParams(location.search).get("part") === "2") document.documentElement.classList.add("qa-part2");
-  }
+  const chrome = document.getElementById("chrome");
   const header = document.getElementById("header");
   const menuBtn = document.getElementById("menuBtn");
   const mobileNav = document.getElementById("mobileNav");
   const toTop = document.querySelector(".to-top");
   const sections = [...document.querySelectorAll("main section[id]")];
-  const navLinks = [...document.querySelectorAll(".desktop-nav a, .bottom-bar a[href^='#']")];
+  const navLinks = [...document.querySelectorAll(".desktop-nav a")];
+
+  const offsetOf = () => (chrome ? chrome.offsetHeight : header ? header.offsetHeight : 0) + 8;
 
   const closeMenu = () => {
     document.body.classList.remove("menu-open");
@@ -43,10 +42,10 @@
 
   const onScroll = () => {
     const y = window.scrollY || 0;
-    header.classList.toggle("is-scrolled", y > 24);
+    if (header) header.classList.toggle("is-scrolled", y > 24);
     if (toTop) toTop.classList.toggle("is-visible", y > 700);
 
-    const headerH = header.offsetHeight + 8;
+    const headerH = offsetOf();
     let current = sections[0] && sections[0].id;
     for (const section of sections) {
       const top = section.getBoundingClientRect().top;
@@ -61,7 +60,6 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  // Smooth anchor offset for sticky header
   document.querySelectorAll('a[href^="#"]').forEach((a) => {
     a.addEventListener("click", (e) => {
       const id = a.getAttribute("href");
@@ -69,16 +67,15 @@
       const target = document.querySelector(id);
       if (!target) return;
       e.preventDefault();
-      const offset = header.offsetHeight + 8;
-      const top = window.scrollY + target.getBoundingClientRect().top - offset;
+      const top = window.scrollY + target.getBoundingClientRect().top - offsetOf();
       window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
       history.replaceState(null, "", id);
     });
   });
 
-  // Scroll reveals
   const els = document.querySelectorAll(".reveal");
-  if ("IntersectionObserver" in window) {
+  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduce && "IntersectionObserver" in window) {
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -93,15 +90,5 @@
     els.forEach((el) => io.observe(el));
   } else {
     els.forEach((el) => el.classList.add("is-in"));
-  }
-
-  const jump = new URLSearchParams(location.search).get("section");
-  if (jump) {
-    const el = document.getElementById(jump);
-    if (el) {
-      const offset = header.offsetHeight + 8;
-      window.scrollTo(0, Math.max(0, window.scrollY + el.getBoundingClientRect().top - offset));
-      onScroll();
-    }
   }
 })();

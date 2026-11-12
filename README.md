@@ -4,6 +4,8 @@ A public, static redesign of [Cutler-O’Neill-Meyer-Woodring Funeral Home & Cre
 
 **Live site:** https://kyleoneill5.github.io/cutler-oneill-redesign/
 
+The current design is a light, typographic layout on warm paper with a forest-green care bar, so Call (712) 322-7779 and Immediate Need stay in reach on every screen.
+
 This is a concept redesign — not the official Cutler-O’Neill-Meyer-Woodring Funeral site. Every name, address, phone number, and service description was copied from their public pages (November 12, 2026) and may change. Photographs are theirs.
 
 Their official site title uses “AI” for the state; this redesign uses the correct “IA.”
