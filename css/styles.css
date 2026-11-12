@@ -1,5 +1,5 @@
 /* Cutler-O'Neill-Meyer-Woodring — concept redesign
-   A quiet, typographic house: warm paper, forest ink, memorial register. */
+   A quiet, typographic house: warm paper, navy ink, memorial register. */
 
 :root {
   --paper: #F3EEE6;
@@ -9,9 +9,9 @@
   --ink-soft: #5C564D;
   --line: #D4CBBE;
   --line-strong: #C4B9A8;
-  --forest: #24332C;
-  --forest-2: #2F4038;
-  --forest-soft: #3E5349;
+  --forest: #1B2A4A;
+  --forest-2: #243A62;
+  --forest-soft: #3D5278;
   --bronze: #8B5A2B;
   --bronze-soft: #B08958;
   --cream: #F7F3EC;
