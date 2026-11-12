@@ -4,7 +4,7 @@ A public, static redesign of [Cutler-O’Neill-Meyer-Woodring Funeral Home & Cre
 
 **Live site:** https://kyleoneill5.github.io/cutler-oneill-redesign/
 
-The current design is a light, typographic layout on warm paper with a navy care bar, so Call (712) 322-7779 and Immediate Need stay in reach on every screen.
+The current design uses a SpaceX-style, full-viewport flow in navy (#1B2A4A), with a minimal fixed nav that keeps Call (712) 322-7779 and Immediate Need on screen at all times.
 
 This is a concept redesign — not the official Cutler-O’Neill-Meyer-Woodring Funeral site. Every name, address, phone number, and service description was copied from their public pages (November 12, 2026) and may change. Photographs are theirs.
 

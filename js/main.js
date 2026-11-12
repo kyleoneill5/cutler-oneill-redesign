@@ -1,13 +1,12 @@
 (function () {
-  const chrome = document.getElementById("chrome");
   const header = document.getElementById("header");
   const menuBtn = document.getElementById("menuBtn");
   const mobileNav = document.getElementById("mobileNav");
-  const toTop = document.querySelector(".to-top");
   const sections = [...document.querySelectorAll("main section[id]")];
   const navLinks = [...document.querySelectorAll(".desktop-nav a")];
+  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const offsetOf = () => (chrome ? chrome.offsetHeight : header ? header.offsetHeight : 0) + 8;
+  const offsetOf = () => (header ? header.offsetHeight : 0);
 
   const closeMenu = () => {
     document.body.classList.remove("menu-open");
@@ -43,17 +42,14 @@
   const onScroll = () => {
     const y = window.scrollY || 0;
     if (header) header.classList.toggle("is-scrolled", y > 24);
-    if (toTop) toTop.classList.toggle("is-visible", y > 700);
 
-    const headerH = offsetOf();
+    const headerH = offsetOf() + 8;
     let current = sections[0] && sections[0].id;
     for (const section of sections) {
-      const top = section.getBoundingClientRect().top;
-      if (top - headerH <= 0) current = section.id;
+      if (section.getBoundingClientRect().top - headerH <= 0) current = section.id;
     }
     navLinks.forEach((link) => {
-      const href = link.getAttribute("href");
-      link.classList.toggle("is-active", href === "#" + current);
+      link.classList.toggle("is-active", link.getAttribute("href") === "#" + current);
     });
   };
 
@@ -67,14 +63,13 @@
       const target = document.querySelector(id);
       if (!target) return;
       e.preventDefault();
-      const top = window.scrollY + target.getBoundingClientRect().top - offsetOf();
-      window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+      const top = window.scrollY + target.getBoundingClientRect().top;
+      window.scrollTo({ top: Math.max(0, top), behavior: reduce ? "auto" : "smooth" });
       history.replaceState(null, "", id);
     });
   });
 
   const els = document.querySelectorAll(".reveal");
-  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!reduce && "IntersectionObserver" in window) {
     const io = new IntersectionObserver(
       (entries) => {
@@ -85,7 +80,7 @@
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0.14, rootMargin: "0px 0px -8% 0px" }
     );
     els.forEach((el) => io.observe(el));
   } else {
