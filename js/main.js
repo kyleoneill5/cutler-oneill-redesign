@@ -1,12 +1,15 @@
 (function () {
   const header = document.getElementById("header");
   const menuBtn = document.getElementById("menuBtn");
-  const mobileNav = document.getElementById("mobileNav");
-  const sections = [...document.querySelectorAll("main section[id]")];
-  const navLinks = [...document.querySelectorAll(".desktop-nav a")];
+  const menu = document.getElementById("menu");
   const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let lastFocus = null;
 
-  const offsetOf = () => (header ? header.offsetHeight : 0);
+  const onScroll = () => {
+    if (header) header.classList.toggle("is-scrolled", window.scrollY > 8);
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
 
   const closeMenu = () => {
     document.body.classList.remove("menu-open");
@@ -14,47 +17,52 @@
       menuBtn.setAttribute("aria-expanded", "false");
       menuBtn.setAttribute("aria-label", "Open menu");
     }
-    if (mobileNav) mobileNav.hidden = true;
+    if (menu) {
+      menu.hidden = true;
+      menu.classList.remove("is-ready");
+    }
+    if (lastFocus) lastFocus.focus();
   };
 
   const openMenu = () => {
+    lastFocus = document.activeElement;
     document.body.classList.add("menu-open");
     menuBtn.setAttribute("aria-expanded", "true");
     menuBtn.setAttribute("aria-label", "Close menu");
-    mobileNav.hidden = false;
+    menu.hidden = false;
+    requestAnimationFrame(() => {
+      menu.classList.add("is-ready");
+      const first = menu.querySelector("a");
+      if (first) first.focus();
+    });
   };
 
-  if (menuBtn) {
+  if (menuBtn && menu) {
     menuBtn.addEventListener("click", () => {
       if (document.body.classList.contains("menu-open")) closeMenu();
       else openMenu();
     });
   }
 
-  document.querySelectorAll(".mobile-nav a").forEach((a) => {
+  document.querySelectorAll(".menu a").forEach((a) => {
     a.addEventListener("click", closeMenu);
   });
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeMenu();
-  });
-
-  const onScroll = () => {
-    const y = window.scrollY || 0;
-    if (header) header.classList.toggle("is-scrolled", y > 24);
-
-    const headerH = offsetOf() + 8;
-    let current = sections[0] && sections[0].id;
-    for (const section of sections) {
-      if (section.getBoundingClientRect().top - headerH <= 0) current = section.id;
+    if (e.key !== "Tab" || !document.body.classList.contains("menu-open")) return;
+    const focusable = [menuBtn, ...menu.querySelectorAll("a")].filter(Boolean);
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
     }
-    navLinks.forEach((link) => {
-      link.classList.toggle("is-active", link.getAttribute("href") === "#" + current);
-    });
-  };
-
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
+  });
 
   document.querySelectorAll('a[href^="#"]').forEach((a) => {
     a.addEventListener("click", (e) => {
@@ -87,6 +95,42 @@
     els.forEach((el) => el.classList.add("is-in"));
   }
 
+  // Count-up for official stats
+  const nums = document.querySelectorAll(".stat-num[data-count]");
+  const runCount = (el) => {
+    const end = Number(el.getAttribute("data-count"));
+    const plus = el.querySelector("span");
+    if (reduce || !end) {
+      el.childNodes[0].textContent = String(end);
+      return;
+    }
+    const start = performance.now();
+    const dur = 1100;
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.childNodes[0].textContent = String(Math.round(end * eased));
+      if (t < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  if ("IntersectionObserver" in window) {
+    const ioN = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            runCount(entry.target);
+            ioN.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    nums.forEach((n) => ioN.observe(n));
+  } else {
+    nums.forEach(runCount);
+  }
+
   const initObitCarousel = () => {
     const root = document.querySelector("[data-carousel]");
     if (!root) return;
@@ -94,10 +138,9 @@
     const prev = root.querySelector(".obit-arrow.prev");
     const next = root.querySelector(".obit-arrow.next");
     const dotsWrap = document.getElementById("obitDots");
+    const bar = document.getElementById("obitProgress");
     const items = Array.from(track.children);
     if (!items.length || !dotsWrap) return;
-
-    const desktop = window.matchMedia("(min-width: 700px)");
 
     dotsWrap.innerHTML = "";
     items.forEach((_, i) => {
@@ -130,10 +173,11 @@
       });
       if (prev) prev.disabled = idx <= 0;
       if (next) next.disabled = idx >= items.length - 1;
+      if (bar) bar.style.width = ((idx + 1) / items.length) * 100 + "%";
     };
 
-    prev && prev.addEventListener("click", () => goTo(indexOf() - 1));
-    next && next.addEventListener("click", () => goTo(indexOf() + 1));
+    if (prev) prev.addEventListener("click", () => goTo(indexOf() - 1));
+    if (next) next.addEventListener("click", () => goTo(indexOf() + 1));
 
     let ticking = false;
     track.addEventListener("scroll", () => {
@@ -146,11 +190,7 @@
     }, { passive: true });
 
     paint(0);
-    window.addEventListener("resize", () => {
-      if (desktop.matches) return;
-      paint();
-    });
+    window.addEventListener("resize", () => paint());
   };
   initObitCarousel();
-
 })();
