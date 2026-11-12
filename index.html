@@ -10,7 +10,7 @@
   <link rel="apple-touch-icon" href="images/apple-touch.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&amp;family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&amp;family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,400&amp;family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body id="top">
@@ -78,7 +78,159 @@
           <a class="btn btn-line btn-lg" href="#need">Immediate Need</a>
         </div>
       </div>
-      <a class="scroll-hint" href="#need" aria-label="Scroll to immediate need"><i></i></a>
+      <a class="scroll-hint" href="#obituaries" aria-label="Scroll to recent obituaries"><i></i></a>
+    </section>
+
+    <section class="panel obits" id="obituaries">
+      <div class="wrap">
+        <header class="section-head obits-head reveal">
+          <p class="eyebrow">Obituaries</p>
+          <h2>Recent Obituaries</h2>
+          <p class="lead">Find your loved one to share a memory or express your condolences. Names and dates are from the funeral home’s public listings; each tribute opens the official obituary.</p>
+        </header>
+      </div>
+      <div class="obit-carousel" data-carousel>
+        <button class="obit-arrow prev" type="button" aria-label="Previous obituaries">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+        </button>
+        <ul class="obit-track" id="obitTrack">
+          <li class="reveal">
+            <article class="obit-card">
+              <div class="obit-photo">
+                <img src="images/obits/1.jpg" alt="Portrait of Thomas G. Gallagher from his official obituary" width="800" height="1000">
+              </div>
+              <div class="obit-body">
+                <h3>Thomas G. Gallagher</h3>
+                <p class="obit-dates">
+                  <time datetime="1958-03-11">March 11, 1958</time>
+                  <span class="obit-div" aria-hidden="true"></span>
+                  <time datetime="2026-11-11">November 11, 2026</time>
+                </p>
+                <a class="btn btn-line-dark btn-tribute" href="https://www.cutleroneill.com/obituaries/Thomas-G-Gallagher?obId=50129788" target="_blank" rel="noopener">View tribute</a>
+              </div>
+            </article>
+          </li>
+          <li class="reveal">
+            <article class="obit-card">
+              <div class="obit-photo">
+                <img src="images/obits/2.jpg" alt="Portrait of Matthew S. Mudra from his official obituary" width="800" height="1000">
+              </div>
+              <div class="obit-body">
+                <h3>Matthew S. Mudra</h3>
+                <p class="obit-dates">
+                  <time datetime="1963-01-29">January 29, 1963</time>
+                  <span class="obit-div" aria-hidden="true"></span>
+                  <time datetime="2026-11-08">November 8, 2026</time>
+                </p>
+                <a class="btn btn-line-dark btn-tribute" href="https://www.cutleroneill.com/obituaries/Matthew-S-Murda?obId=50126466" target="_blank" rel="noopener">View tribute</a>
+              </div>
+            </article>
+          </li>
+          <li class="reveal">
+            <article class="obit-card">
+              <div class="obit-photo">
+                <img src="images/obits/3.jpg" alt="Portrait of Patricia A. Benson from her official obituary" width="800" height="1000">
+              </div>
+              <div class="obit-body">
+                <h3>Patricia A. Benson</h3>
+                <p class="obit-dates">
+                  <time datetime="1937-09-11">September 11, 1937</time>
+                  <span class="obit-div" aria-hidden="true"></span>
+                  <time datetime="2026-11-11">November 11, 2026</time>
+                </p>
+                <a class="btn btn-line-dark btn-tribute" href="https://www.cutleroneill.com/obituaries/Patricia-A-Benson?obId=50125607" target="_blank" rel="noopener">View tribute</a>
+              </div>
+            </article>
+          </li>
+          <li class="reveal">
+            <article class="obit-card">
+              <div class="obit-photo">
+                <img src="images/obits/4.jpg" alt="Portrait of Flora Belle Richards from her official obituary" width="800" height="1000">
+              </div>
+              <div class="obit-body">
+                <h3>Flora Belle Richards</h3>
+                <p class="obit-dates">
+                  <time datetime="1934-12-22">December 22, 1934</time>
+                  <span class="obit-div" aria-hidden="true"></span>
+                  <time datetime="2026-11-09">November 9, 2026</time>
+                </p>
+                <a class="btn btn-line-dark btn-tribute" href="https://www.cutleroneill.com/obituaries/Flora-Belle-Richards?obId=50125157" target="_blank" rel="noopener">View tribute</a>
+              </div>
+            </article>
+          </li>
+          <li class="reveal">
+            <article class="obit-card">
+              <div class="obit-photo">
+                <img src="images/obits/5.jpg" alt="Portrait of Daisy L. Weaver from her official obituary" width="800" height="1000">
+              </div>
+              <div class="obit-body">
+                <h3>Daisy L. Weaver</h3>
+                <p class="obit-dates">
+                  <time datetime="1940-08-27">August 27, 1940</time>
+                  <span class="obit-div" aria-hidden="true"></span>
+                  <time datetime="2026-11-10">November 10, 2026</time>
+                </p>
+                <a class="btn btn-line-dark btn-tribute" href="https://www.cutleroneill.com/obituaries/Daisy-L-Weaver?obId=50121083" target="_blank" rel="noopener">View tribute</a>
+              </div>
+            </article>
+          </li>
+          <li class="reveal">
+            <article class="obit-card">
+              <div class="obit-photo">
+                <img src="images/obits/6.jpg" alt="Portrait of Jodie R. Brooks from her official obituary" width="800" height="1000">
+              </div>
+              <div class="obit-body">
+                <h3>Jodie R. Brooks</h3>
+                <p class="obit-dates">
+                  <time datetime="1954-12-17">December 17, 1954</time>
+                  <span class="obit-div" aria-hidden="true"></span>
+                  <time datetime="2026-11-09">November 9, 2026</time>
+                </p>
+                <a class="btn btn-line-dark btn-tribute" href="https://www.cutleroneill.com/obituaries/Jodie-R-Brooks?obId=50120599" target="_blank" rel="noopener">View tribute</a>
+              </div>
+            </article>
+          </li>
+          <li class="reveal">
+            <article class="obit-card">
+              <div class="obit-photo">
+                <img src="images/obits/7.jpg" alt="Portrait of Dennis D. Riggle, Sr. from his official obituary" width="800" height="1000">
+              </div>
+              <div class="obit-body">
+                <h3>Dennis D. Riggle, Sr.</h3>
+                <p class="obit-dates">
+                  <time datetime="1956-10-06">October 6, 1956</time>
+                  <span class="obit-div" aria-hidden="true"></span>
+                  <time datetime="2026-11-06">November 6, 2026</time>
+                </p>
+                <a class="btn btn-line-dark btn-tribute" href="https://www.cutleroneill.com/obituaries/Dennis-D-Riggle-Sr?obId=50118079" target="_blank" rel="noopener">View tribute</a>
+              </div>
+            </article>
+          </li>
+          <li class="reveal">
+            <article class="obit-card">
+              <div class="obit-photo">
+                <img src="images/obits/8.jpg" alt="Portrait of Laura L. Hartley from her official obituary" width="800" height="1000">
+              </div>
+              <div class="obit-body">
+                <h3>Laura L. Hartley</h3>
+                <p class="obit-dates">
+                  <time datetime="1946-12-23">December 23, 1946</time>
+                  <span class="obit-div" aria-hidden="true"></span>
+                  <time datetime="2026-11-07">November 7, 2026</time>
+                </p>
+                <a class="btn btn-line-dark btn-tribute" href="https://www.cutleroneill.com/obituaries/Laura-L-Hartley?obId=50112754" target="_blank" rel="noopener">View tribute</a>
+              </div>
+            </article>
+          </li>
+        </ul>
+        <button class="obit-arrow next" type="button" aria-label="Next obituaries">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+        <div class="obit-dots" id="obitDots" role="tablist" aria-label="Obituary cards"></div>
+      </div>
+      <div class="wrap section-cta reveal">
+        <a class="btn btn-line" href="https://www.cutleroneill.com/obituaries/obituary-listings" target="_blank" rel="noopener">View all obituaries</a>
+      </div>
     </section>
 
     <section class="panel need" id="need">
@@ -103,101 +255,6 @@
             <p class="need-addr">121 S 7th St, Council Bluffs, IA 51501</p>
             <span class="text-link">Tap to call</span>
           </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="panel light obits" id="obituaries">
-      <div class="wrap">
-        <header class="section-head reveal">
-          <p class="eyebrow">Obituaries</p>
-          <h2>Recent obituaries</h2>
-          <p class="lead">Find your loved one to share a memory or express your condolences. Names and dates below are from the funeral home’s public listings; each entry opens the official obituary.</p>
-        </header>
-        <ul class="obit-register">
-          <li class="reveal">
-            <a class="obit-row" href="https://www.cutleroneill.com/obituaries/Thomas-G-Gallagher?obId=50129788" target="_blank" rel="noopener">
-              <img src="images/obits/1.jpg" alt="" width="320" height="400">
-              <div class="obit-meta">
-                <h3>Thomas Gallagher</h3>
-                <p>November 11, 2026</p>
-              </div>
-              <span class="text-link">Official obituary</span>
-            </a>
-          </li>
-          <li class="reveal">
-            <a class="obit-row" href="https://www.cutleroneill.com/obituaries/Matthew-S-Murda?obId=50126466" target="_blank" rel="noopener">
-              <img src="images/obits/2.jpg" alt="" width="320" height="400">
-              <div class="obit-meta">
-                <h3>Matthew Murda</h3>
-                <p>November 8, 2026</p>
-              </div>
-              <span class="text-link">Official obituary</span>
-            </a>
-          </li>
-          <li class="reveal">
-            <a class="obit-row" href="https://www.cutleroneill.com/obituaries/Patricia-A-Benson?obId=50125607" target="_blank" rel="noopener">
-              <img src="images/obits/3.jpg" alt="" width="320" height="400">
-              <div class="obit-meta">
-                <h3>Patricia Benson</h3>
-                <p>November 11, 2026</p>
-              </div>
-              <span class="text-link">Official obituary</span>
-            </a>
-          </li>
-          <li class="reveal">
-            <a class="obit-row" href="https://www.cutleroneill.com/obituaries/Flora-Belle-Richards?obId=50125157" target="_blank" rel="noopener">
-              <img src="images/obits/4.jpg" alt="" width="320" height="400">
-              <div class="obit-meta">
-                <h3>Flora Belle Richards</h3>
-                <p>November 9, 2026</p>
-              </div>
-              <span class="text-link">Official obituary</span>
-            </a>
-          </li>
-          <li class="reveal">
-            <a class="obit-row" href="https://www.cutleroneill.com/obituaries/Daisy-L-Weaver?obId=50121083" target="_blank" rel="noopener">
-              <img src="images/obits/5.jpg" alt="" width="320" height="400">
-              <div class="obit-meta">
-                <h3>Daisy Weaver</h3>
-                <p>November 10, 2026</p>
-              </div>
-              <span class="text-link">Official obituary</span>
-            </a>
-          </li>
-          <li class="reveal">
-            <a class="obit-row" href="https://www.cutleroneill.com/obituaries/Jodie-R-Brooks?obId=50120599" target="_blank" rel="noopener">
-              <img src="images/obits/6.jpg" alt="" width="320" height="400">
-              <div class="obit-meta">
-                <h3>Jodie Brooks</h3>
-                <p>November 9, 2026</p>
-              </div>
-              <span class="text-link">Official obituary</span>
-            </a>
-          </li>
-          <li class="reveal">
-            <a class="obit-row" href="https://www.cutleroneill.com/obituaries/Dennis-D-Riggle-Sr?obId=50118079" target="_blank" rel="noopener">
-              <img src="images/obits/7.jpg" alt="" width="320" height="400">
-              <div class="obit-meta">
-                <h3>Dennis Riggle, Sr.</h3>
-                <p>November 6, 2026</p>
-              </div>
-              <span class="text-link">Official obituary</span>
-            </a>
-          </li>
-          <li class="reveal">
-            <a class="obit-row" href="https://www.cutleroneill.com/obituaries/Laura-L-Hartley?obId=50112754" target="_blank" rel="noopener">
-              <img src="images/obits/8.jpg" alt="" width="320" height="400">
-              <div class="obit-meta">
-                <h3>Laura Hartley</h3>
-                <p>November 7, 2026</p>
-              </div>
-              <span class="text-link">Official obituary</span>
-            </a>
-          </li>
-        </ul>
-        <div class="section-cta reveal">
-          <a class="btn btn-line-dark" href="https://www.cutleroneill.com/obituaries/obituary-listings" target="_blank" rel="noopener">All obituaries</a>
         </div>
       </div>
     </section>

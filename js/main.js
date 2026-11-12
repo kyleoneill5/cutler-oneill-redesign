@@ -86,4 +86,71 @@
   } else {
     els.forEach((el) => el.classList.add("is-in"));
   }
+
+  const initObitCarousel = () => {
+    const root = document.querySelector("[data-carousel]");
+    if (!root) return;
+    const track = root.querySelector(".obit-track");
+    const prev = root.querySelector(".obit-arrow.prev");
+    const next = root.querySelector(".obit-arrow.next");
+    const dotsWrap = document.getElementById("obitDots");
+    const items = Array.from(track.children);
+    if (!items.length || !dotsWrap) return;
+
+    const desktop = window.matchMedia("(min-width: 700px)");
+
+    dotsWrap.innerHTML = "";
+    items.forEach((_, i) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("aria-label", "Show obituary " + (i + 1) + " of " + items.length);
+      b.addEventListener("click", () => goTo(i));
+      dotsWrap.appendChild(b);
+    });
+
+    const gapOf = () => {
+      const style = window.getComputedStyle(track);
+      return parseFloat(style.columnGap || style.gap) || 16;
+    };
+    const cardStep = () => items[0].getBoundingClientRect().width + gapOf();
+    const indexOf = () => Math.round(track.scrollLeft / cardStep());
+
+    const goTo = (i) => {
+      const max = items.length - 1;
+      i = Math.max(0, Math.min(max, i));
+      track.scrollTo({ left: i * cardStep(), behavior: reduce ? "auto" : "smooth" });
+      paint(i);
+    };
+
+    const paint = (i) => {
+      const idx = typeof i === "number" ? i : indexOf();
+      dotsWrap.querySelectorAll("button").forEach((b, n) => {
+        b.classList.toggle("is-on", n === idx);
+        b.setAttribute("aria-current", n === idx ? "true" : "false");
+      });
+      if (prev) prev.disabled = idx <= 0;
+      if (next) next.disabled = idx >= items.length - 1;
+    };
+
+    prev && prev.addEventListener("click", () => goTo(indexOf() - 1));
+    next && next.addEventListener("click", () => goTo(indexOf() + 1));
+
+    let ticking = false;
+    track.addEventListener("scroll", () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        paint();
+        ticking = false;
+      });
+    }, { passive: true });
+
+    paint(0);
+    window.addEventListener("resize", () => {
+      if (desktop.matches) return;
+      paint();
+    });
+  };
+  initObitCarousel();
+
 })();
